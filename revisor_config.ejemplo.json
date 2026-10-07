@@ -1,0 +1,30 @@
+{
+  "cuentas": [
+    {
+      "usuario_env": "SMTP_USER",
+      "clave_env": "SMTP_PASS",
+      "remitentes": [
+        "person1@example.com"
+      ]
+    },
+    {
+      "usuario_env": "REVISOR_USER_2",
+      "clave_env": "REVISOR_PASS_2",
+      "remitentes": [
+        "user@example.com"
+      ]
+    }
+  ],
+  "sin_datos_bancarios_ok": [
+    "INSURANCE CO."
+  ],
+  "boletas_impuestos": [
+    {
+      "organismo": "ARBA",
+      "partida": "000-000000-0",
+      "unidad": "UNIT_B",
+      "proveedor": "ARBA ...",
+      "condicion_pago": "PAGO ONLINE"
+    }
+  ]
+}
