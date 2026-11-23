@@ -1,5 +1,7 @@
 # Purchase order → payment order automation
 
+[![tests](https://github.com/lautarobermudez/purchase-order-automation/actions/workflows/ci.yml/badge.svg)](https://github.com/lautarobermudez/purchase-order-automation/actions/workflows/ci.yml)
+
 Python scripts that turn purchase orders (spreadsheet or PDF), invoices and tax bills into **payment orders (OP)** for the accounts-payable team of a small Argentine group of companies, and that watch an inbox so most of them are generated without manual typing.
 
 I built and run this at work. The company, supplier, bank and employee data in this public copy is replaced with placeholders (`ACME`, `UNIT_B`, `SUPPLIER_X`, `example.com`), and the company's official OP template is not included, so **it will not run as-is**. It is published to show the design and the code.
@@ -24,8 +26,15 @@ I built and run this at work. The company, supplier, bank and employee data in t
 ## Stack
 Python 3 (standard library only: `imaplib`, `smtplib`, `zipfile`, `xml`, `subprocess`), Claude Code CLI for the invoice-reading step. It uses `fcntl`, so it runs on Linux/WSL.
 
+## Tests
+The validation rules are covered by 46 tests (standard library `unittest`, no dependencies), and CI runs them on every push:
+
+```bash
+python -m unittest discover -s tests -t . -v
+```
+
 ## Known limitations
 - Code and comments are in Spanish.
-- No automated tests yet. Behaviour was checked with real documents and dry-runs. Adding `pytest` tests for the CUIT check, duplicate detection and the gate is the next step I would take.
+- Tests cover the validation rules (CUIT check digit, invoice-number parsing, the gate, duplicate detection, OP numbering), but not the IMAP, SMTP, printing or Claude-reading steps, which were checked with real documents and dry-runs.
 - `generar_ops.py` and `revisor_mail.py` are long single files and should be split into modules.
 - Tied to one OP template layout.
